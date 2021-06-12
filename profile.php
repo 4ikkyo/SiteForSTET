@@ -18,8 +18,11 @@ if (isset($_POST['submit']) and $_FILES) {
   <title>Авторизация и регистрация</title>
   <link type="text/css" rel="stylesheet" href="css/main.css">
   <link type="text/css" rel="stylesheet" href="css/vkladki.css">
-  <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-  <script src="js/1.js"></script>
+  <script type="text/javascript" src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+  <script type="text/javascript" src="js/1.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="css/wa-mediabox.css">
+  <script type="text/javascript" src="js/wa-mediabox.js"></script>
 </head>
 
 <body style="width: 70%; margin: auto;">
@@ -55,12 +58,12 @@ if (isset($_POST['submit']) and $_FILES) {
 <!-- Кнопка загрузить фото -->
 
 <!-- Скрипт отображения загруженных фото -->
-  <div style="width:50%; margin-left: auto; margin-right: auto;"> <!-- тут типо эти все фотографии должны быть оформлены в рамочку ну хз оформите -->
+  <div id="gallery" style="width:50%; margin-left: auto; margin-right: auto;"> <!-- тут типо эти все фотографии должны быть оформлены в рамочку ну хз оформите -->
     <?php //Отсюда ничего не трогаем
     $path = scandir("uploads");
     foreach ($path as $f) {
-      if (strpos($f, $id) === 0) {
-        echo "<a target='image' href='uploads/$f'><img  src='uploads/$f' width=20% /></a>";
+      if (strpos($f, $id."_") === 0) {
+        echo "<a data-mediabox='gallery-1' href='uploads/$f'><img  src='uploads/$f' width=20% /></a>";
       }
     }
     ?>
@@ -134,8 +137,6 @@ if (isset($_POST['submit']) and $_FILES) {
         <img src="image/logo.png" width="533" height="77" alt="Лого">
     </div>
 </div>
-
-
 </body>
 
 </html>
