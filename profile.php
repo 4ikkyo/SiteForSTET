@@ -6,8 +6,13 @@ if (!$_SESSION['user']) {
 $id = $_SESSION['user']['id'];
 ?>
 <?php
+if(isset($_FILES['file']['name'])) {
+  $total_files = count($_FILES['file']['name']);
+  for($key = 0; $key < $total_files; $key++) {
 if (isset($_POST['submit']) and $_FILES) {
-  move_uploaded_file($_FILES['file']['tmp_name'], "uploads/" . $id . "_" . $_FILES['file']['name']);
+  move_uploaded_file($_FILES['file']['tmp_name'][$key], "uploads/" . $id . "_" . $_FILES['file']['name'][$key]);
+}
+  }
 }
 ?>
 <!-- СКРИПТЫ НЕ ТРОГАТЬ -->
@@ -52,7 +57,7 @@ if (isset($_POST['submit']) and $_FILES) {
 
 <!-- Кнопка загрузить фото -->
   <form method="post" action="" enctype="multipart/form-data" align="center">
-    <input type="file" name="file"><br>
+    <input type="file" name="file[]" accept=".jpg, .png" multiple><br>
     <input type="submit" name="submit" value="Загрузить">
   </form>
 <!-- Кнопка загрузить фото -->
