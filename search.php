@@ -11,7 +11,7 @@ $id = $_SESSION['user']['id'];
     <meta charset="UTF-8">
     <title>Поиск</title>
     <link rel="stylesheet" href="assets/css/main.css">
-	<script src="js/searchs.js"></script>
+	  <script src="js/search.js"></script>
 </head>
 
 <body>
@@ -33,10 +33,11 @@ $id = $_SESSION['user']['id'];
   
   
 <div align="center">
-  <input class="form-control" type="text" placeholder="Поиск" id="search-text" onkeyup="tableSearch()">
+  <input class="form-control" type="text" placeholder="Поиск" id="search-text" onkeyup="tableSearch()"> <!--Поисковая строчка-->
 </div>
+
     <div>
-	<table id="info-table" align="center"  class="container">
+	<table id="info-table" class="table" align="center">
         <?php
         require_once "vendor/connect.php";
         //Получаем данные
