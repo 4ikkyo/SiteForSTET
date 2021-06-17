@@ -15,6 +15,7 @@ if (isset($_FILES['file']['name'])) {
   }
 }
 ?>
+
 <!-- СКРИПТЫ НЕ ТРОГАТЬ -->
 
 <html lang="en">
@@ -23,13 +24,12 @@ if (isset($_FILES['file']['name'])) {
   <meta charset="UTF-8">
   <title>Авторизация и регистрация</title>
   <link href="https://unpkg.com/tailwindcss@%5E2/dist/tailwind.min.css" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="css/main.css">
-  <link type="text/css" rel="stylesheet" href="css/vkladki.css">
+  <link type="text/css" rel="stylesheet" href="/css/main.css">
   <script type="text/javascript" src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-  <script type="text/javascript" src="js/1.js"></script>
+  <script type="text/javascript" src="/js/1.js"></script>
 
-  <link type="text/css" rel="stylesheet" href="css/wa-mediabox.css">
-  <script type="text/javascript" src="js/wa-mediabox.js"></script>
+  <link type="text/css" rel="stylesheet" href="/css/wa-mediabox.css">
+  <script type="text/javascript" src="/js/wa-mediabox.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <style>
     :root {
@@ -47,17 +47,22 @@ if (isset($_FILES['file']['name'])) {
     .border-main-color {
       border-color: var(--main-color);
     }
+
+    img {
+      display: inline;
+      width: 300px;
+    }
   </style>
 </head>
 
-<body> <!--style="width: 70%; margin: auto;" -->
+<body>
   <!-- Верхнее меню -->
   <nav class="bg-light">
     <div class="container d-flex flex-wrap">
       <div class="flex">
         <nav class="flex w-72 bg-blue-100 md:16 lg:w-72">
           <div class="w-full flex mx-auto ">
-            <div class="justify-center text-gray-900 text-lg border-dashed">
+            <div class="justify-center text-gray-900 text-lg border-dashed" style="width: 100%;">
               <ul class="nav me-auto">
                 <li><a class=" flex  items-center h-11">
                   </a>
@@ -79,15 +84,6 @@ if (isset($_FILES['file']['name'])) {
                     </span>
                     <span class="ml-2  tracking-wide truncate hidden lg:block">
                       Вакансии</a>
-                </li>
-                <li class="nav-item"><a href="../publicvacancies.php" class="relative flex  items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800 pr-6">
-                    <span class=" ml-4">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                      </svg>
-                    </span>
-                    <span class="ml-2  tracking-wide truncate hidden lg:block">
-                      Опубликовать вакансии</a>
                 </li>
                 <li class="nav-item"><a href="../search.php" class="relative flex  items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">
                     <span class=" ml-4">
@@ -132,11 +128,11 @@ if (isset($_FILES['file']['name'])) {
                     <h1 class="mx-5 text-gray-900 font text-lg leading-8 my-1"><?= $_SESSION['user']['full_name'] ?></h1><!-- Имя пользователя -->
                     <li class="flex items-center py-3">
                       <span class=text-base>Статус:</span>
-                      <span class="ml-auto"><span class="bg-blue-300 py-1 px-2 rounded text-white ">Студентка</span></span>
+                      <span class="ml-auto"><span class="bg-blue-300 py-1 px-2 rounded text-white "><?= $_SESSION['user']['pol'] ?></span></span>
                     </li>
                     <li class="flex items-center py-3">
                       <span>Начало обучения:</span>
-                      <span class="ml-auto">01.09.2018</span>
+                      <span class="ml-auto"><?= $_SESSION['user']['nachobuch'] ?></span>
                     </li>
                     </ul>
                   </div>
@@ -163,21 +159,17 @@ if (isset($_FILES['file']['name'])) {
                         <div class="grid grid-cols-2">
 
                           <div class="border-l-2 border-blue-200 mt-9 mx-7 py-2 px-4 font-semibold">Контактый телефон:</div>
-                          <div class="mt-9 px-1 py-2">+7(978)888-88-88</div>
-                        </div>
-                        <div class="grid grid-cols-2">
-                          <div class="border-l-2 border-blue-200 mx-7 py-2 px-4 font-semibold">Адрес проживания:</div>
-                          <div class="px-1 py-2">Севастополь, ул. Адмирала Юмашева</div>
+                          <div class="mt-9 px-1 py-2"><?= $_SESSION['user']['phone'] ?></div>
                         </div>
                         <div class="grid grid-cols-2">
                           <div class="border-l-2 border-blue-200 mx-7 py-2 px-4 font-semibold">Почта:</div>
                           <div class="px-1 py-2">
-                            <a class="text-blue-800" href="mailto:jane@example.com">pochta@gmail.com</a><!-- Имейл -->
+                            <a class="text-blue-800" href="mailto:jane@example.com"><?= $_SESSION['user']['email'] ?></a><!-- Имейл -->
                           </div>
                         </div>
                         <div class="grid grid-cols-2">
                           <div class="border-l-2  border-blue-200 mx-7 py-2 px-4 font-semibold">Дата рождения:</div>
-                          <div class="px-1 py-2">01.01.2002</div>
+                          <div class="px-1 py-2"><?= $_SESSION['user']['birthday'] ?></div>
                         </div>
                       </div>
                     </div>
@@ -198,97 +190,119 @@ if (isset($_FILES['file']['name'])) {
             <!--<a href="#"><?= $_SESSION['user']['email'] ?></a> -->
           </form>
 
-          <!-- Кнопка загрузить фото -->
-          <form method="post" action="" enctype="multipart/form-data" align="center">
-            <input class="transition duration-500 bg-blue-200 hover:bg-blue-400 text-white text-l py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="file" name="file[]" accept=".jpg, .png" multiple>
-            <input class="transition duration-500 bg-blue-200 hover:bg-blue-400 text-white text-l py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" name="submit" value="Загрузить">
-          </form>
-          <!-- Кнопка загрузить фото -->
-
-          <!-- Скрипт отображения загруженных фото -->
-          <div id="gallery" style="width:50%; margin-left: auto; margin-right: auto;">
-            <!-- тут типо эти все фотографии должны быть оформлены в рамочку ну хз оформите -->
-            <?php //Отсюда ничего не трогаем
-            $path = scandir("uploads");
-            foreach ($path as $f) {
-              if (strpos($f, $id . "_") === 0) {
-                echo "<a data-mediabox='gallery-1' href='uploads/$f'><img  src='uploads/$f' width=20% /></a>";
-              }
-            }
-            ?>
-          </div>
-          <!-- Скрипт отображения загруженных фото -->
 
           <!-- Вкладки -->
-          <div class="tabs ">
-            <input type="radio" name="inset" value="" id="tab_1" checked>
-            <label for="tab_1" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Вкладка №1</label>
+          <div class="container mx-auto my-5 p-5">
+            <div class="tabs">
+              <input type="radio" name="inset" value="" id="tab_1" checked>
+              <label for="tab_1" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">О себе</label>
 
-            <input type="radio" name="inset" value="" id="tab_2">
-            <label for="tab_2" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Вкладка №2</label>
+              <input type="radio" name="inset" value="" id="tab_2">
+              <label for="tab_2" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Мои работы</label>
 
-            <input type="radio" name="inset" value="" id="tab_3">
-            <label for="tab_3" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Вкладка №3</label>
+              <input type="radio" name="inset" value="" id="tab_3">
+              <label for="tab_3" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Грамоты</label>
 
-            <input type="radio" name="inset" value="" id="tab_4">
-            <label for="tab_4" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Вкладка №4</label>
-            <!-- Вкладки -->
+              <!--<input type="radio" name="inset" value="" id="tab_4">
+              <label for="tab_4" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Мои работы</label>-->
+              <!-- Вкладки -->
 
-            <div id="txt_1">
-              <!-- Что будет отображаться в 1-ой вкладке -->
-              <div class="container">
-                <div style="text-align: center;">
-                  <a href="#openModal"><button>Добавить запись</button></a> <!-- Кнопка добавить запись -->
-                </div>
-                <form method="post" action="vendor/public.php" enctype="multipart/form-data">
-                  <div id="openModal" class="modal">
-                    <div class="modal-dialog">
-                      <div class="modal-body" style="display: flex; flex-direction: column;">
-                        <a href="#close" title="Close" class="close" style="height: 3px; margin-left: auto;">×</a>
-                        <textarea name="text"></textarea>
-                        <button type="submit" style="margin: auto;">Создать</button>
-                        <script>
-                          CKEDITOR.replace('text');
-                        </script>
+              <div id="txt_1">
+                <!-- Что будет отображаться в 1-ой вкладке -->
+                <div class="container">
+                  <div style="text-align: center;">
+                    <a href="#openModal"><button>Добавить запись</button></a> <!-- Кнопка добавить запись -->
+                  </div>
+                  <form method="post" action="vendor/public.php" enctype="multipart/form-data">
+                    <div id="openModal" class="modal">
+                      <div class="modal-dialog">
+                        <div class="modal-body" style="display: flex; flex-direction: column;">
+                          <a href="#close" title="Close" class="close" style="height: 3px; margin-left: auto;">×</a>
+                          <textarea name="text"></textarea>
+                          <button type="submit" style="margin: auto;">Создать</button>
+                          <script>
+                            CKEDITOR.replace('text');
+                          </script>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
+                <!-- Скрипт отображения всех добавленных записей в 1-ой вкладке -->
+                <?php
+                require_once "vendor/connect.php";
+                //Получаем данные
+                $sql = mysqli_query($connect, "SELECT * FROM public WHERE `iduser` = $id;");
+                while ($result = mysqli_fetch_array($sql)) {
+                  echo  "<a align='right'>{$result['time']}</a>";
+                  echo '<section>';
+                  echo '<form>';
+                  echo  "{$result['text']}";
+                  echo '</form>';
+                  echo '<hr>';
+                  echo '</section>';
+                }
+                ?>
+
               </div>
-              <!-- Скрипт отображения всех добавленных записей в 1-ой вкладке -->
-              <?php
-              require_once "vendor/connect.php";
-              //Получаем данные
-              $sql = mysqli_query($connect, "SELECT * FROM public WHERE `iduser` = $id;");
-              while ($result = mysqli_fetch_array($sql)) {
-                echo  "<a align='right'>{$result['time']}</a>";
-                echo '<section>';
-                echo '<form>';
-                echo  "{$result['text']}";
+
+
+              <div id="txt_2">
+                <!-- Что будет отображаться в 2-ой вкладке -->
+                <form method="post" action="" enctype="multipart/form-data" align="center">
+                  <input class="transition duration-500 bg-blue-200 hover:bg-blue-400 text-white text-l py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="file" name="file[]" accept=".pdf" multiple>
+                  <input class="transition duration-500 bg-blue-200 hover:bg-blue-400 text-white text-l py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" name="submit" value="Загрузить">
+                </form>
+                
+                <div style="display: flex;justify-content: flex-end;">
+                <input form="delete" type="submit" name="deleted" value="Delete"/>
+                </div>
+
+                <?php //Отсюда ничего не трогаем
+                echo '<form id="delete" method="post" action="vendor/delete.php" action="" style="margin-top: 15px;">';
+                foreach (glob("uploads/{$id}_*.pdf") as $f) {
+                  $file = pathinfo($f);
+                  echo '<div style="display: inline-flex; width: 10%; flex-direction: column; margin: 20px;">';
+                  echo "<a data-mediabox='gallery-1' data-iframe='true' href='$f'><img  src='default\pdf.png' style='' /></a>";
+                  echo "<input type='checkbox' value='$f' name='delete[]' style='float: left;'>";
+                  echo '<small>' . $file['basename'] . '</small>';
+                  echo '</div>';
+                }
                 echo '</form>';
-                echo '<hr>';
-                echo '</section>';
-              }
-              ?>
+                ?>
+              </div>
 
-            </div>
+              <div id="txt_3">
+                <!-- Кнопка загрузить фото -->
+                <form method="post" action="" enctype="multipart/form-data" align="center">
+                  <input class="transition duration-500 bg-blue-200 hover:bg-blue-400 text-white text-l py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="file" name="file[]" accept=".jpg, .png" multiple>
+                  <input class="transition duration-500 bg-blue-200 hover:bg-blue-400 text-white text-l py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" name="submit" value="Загрузить">
+                </form>
+                <!-- Кнопка загрузить фото -->
 
+                <!-- Скрипт отображения загруженных фото -->
+                <div id="gallery">
+                  <!--style="width:50%; margin-left: auto; margin-right: auto;"-->
+                  <!-- тут типо эти все фотографии должны быть оформлены в рамочку ну хз оформите -->
+                  <?php //Отсюда ничего не трогаем
+                  foreach (glob("uploads/{$id}_*.png") as $f) {
+                    echo "<a data-mediabox='gallery-1' href='$f'><img  src='$f' width=20% /></a>";
+                  }
+                  foreach (glob("uploads/{$id}_*.jpg") as $f) {
+                    echo "<a data-mediabox='gallery-1' href='$f'><img  src='$f' width=20% /></a>";
+                  }
+                  foreach (glob("uploads/{$id}_*.jpeg") as $f) {
+                    echo "<a data-mediabox='gallery-1' href='$f'><img  src='$f' width=20% /></a>";
+                  }
+                  ?>
+                </div>
+                <!-- Скрипт отображения загруженных фото -->
+              </div>
 
-            <div id="txt_2">
-              <!-- Что будет отображаться в 2-ой вкладке -->
-              <p>Вторая вкладка</p>
-              <a href="uploads/1.pdf" data-mediabox="my-gallery-name" data-iframe="true" data-title=""> <img src="image-thumb.jpg" alt="Image" /> </a>
-            </div>
-
-            <div id="txt_3">
-              <!-- Что будет отображаться в 3-ей вкладке -->
-              <p>Размеры содержимого вкладок</p>
-              <p>могут отличаться по высоте!</p>
-            </div>
-
-            <div id="txt_4">
-              <!-- Что будет отображаться в 4-ой вкладке -->
-              <img src="image/logo.png" width="533" height="77" alt="Лого">
+              <div id="txt_4">
+                <!-- Что будет отображаться в 4-ой вкладке -->
+                <img src="image/logo.png" width="533" height="77" alt="Лого">
+              </div>
             </div>
           </div>
         </div>

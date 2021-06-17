@@ -16,7 +16,11 @@
             "id" => $row['id'],
             "full_name" => $row['full_name'],
             "avatar" => $row['avatar'],
-            "email" => $row['email']
+            "email" => $row['email'],
+            "pol" => $row['pol'],
+            "birthday" => $row['birthday'],
+            "nachobuch" => $row['nachobuch'],
+            "phone" => $row['phone']
         ];
 
         header('Location: ../profile.php');

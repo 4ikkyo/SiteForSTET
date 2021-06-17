@@ -4,7 +4,7 @@ require_once "vendor/connect.php";
 if (!$_SESSION['user']) {
   header('Location: /');
 }
-$user = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM `users` WHERE id = '".(int)$_GET['id']."'"));
+$user = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM `users` WHERE id = '" . (int)$_GET['id'] . "'"));
 $id = $_GET['id'];
 ?>
 <!-- СКРИПТЫ НЕ ТРОГАТЬ -->
@@ -12,16 +12,15 @@ $id = $_GET['id'];
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <title>Авторизация и регистрация</title>
   <link href="https://unpkg.com/tailwindcss@%5E2/dist/tailwind.min.css" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="css/main.css">
-  <link type="text/css" rel="stylesheet" href="css/vkladki.css">
+  <link type="text/css" rel="stylesheet" href="/css/main.css">
   <script type="text/javascript" src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-  <script type="text/javascript" src="js/1.js"></script>
+  <script type="text/javascript" src="/js/1.js"></script>
 
-  <link type="text/css" rel="stylesheet" href="css/wa-mediabox.css">
-  <script type="text/javascript" src="js/wa-mediabox.js"></script>
+  <link type="text/css" rel="stylesheet" href="/css/wa-mediabox.css">
+  <script type="text/javascript" src="/js/wa-mediabox.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <style>
     :root {
@@ -39,17 +38,22 @@ $id = $_GET['id'];
     .border-main-color {
       border-color: var(--main-color);
     }
-  </style>
+
+    img {
+      display: inline;
+      width: 300px;
+    }
+  </style>s
 </head>
 
-<body> <!--  style="width: 70%; margin: auto;"-->
+<body>
   <!-- Верхнее меню -->
   <nav class="bg-light">
     <div class="container d-flex flex-wrap">
       <div class="flex">
         <nav class="flex w-72 bg-blue-100 md:16 lg:w-72">
           <div class="w-full flex mx-auto ">
-            <div class="justify-center text-gray-900 text-lg border-dashed">
+            <div class="justify-center text-gray-900 text-lg border-dashed" style="width: 100%;">
               <ul class="nav me-auto">
                 <li><a class=" flex  items-center h-11">
                   </a>
@@ -71,15 +75,6 @@ $id = $_GET['id'];
                     </span>
                     <span class="ml-2  tracking-wide truncate hidden lg:block">
                       Вакансии</a>
-                </li>
-                <li class="nav-item"><a href="../publicvacancies.php" class="relative flex  items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800 pr-6">
-                    <span class=" ml-4">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                      </svg>
-                    </span>
-                    <span class="ml-2  tracking-wide truncate hidden lg:block">
-                      Опубликовать вакансии</a>
                 </li>
                 <li class="nav-item"><a href="../search.php" class="relative flex  items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">
                     <span class=" ml-4">
@@ -158,10 +153,6 @@ $id = $_GET['id'];
                           <div class="mt-9 px-1 py-2">+7(978)888-88-88</div>
                         </div>
                         <div class="grid grid-cols-2">
-                          <div class="border-l-2 border-blue-200 mx-7 py-2 px-4 font-semibold">Адрес проживания:</div>
-                          <div class="px-1 py-2">Севастополь, ул. Адмирала Юмашева</div>
-                        </div>
-                        <div class="grid grid-cols-2">
                           <div class="border-l-2 border-blue-200 mx-7 py-2 px-4 font-semibold">Почта:</div>
                           <div class="px-1 py-2">
                             <a class="text-blue-800" href="mailto:jane@example.com">pochta@gmail.com</a><!-- Имейл -->
@@ -173,8 +164,6 @@ $id = $_GET['id'];
                         </div>
                       </div>
                     </div>
-
-
                     <!-- End of about section -->
 
                     <div class="my-4"></div>
@@ -191,35 +180,25 @@ $id = $_GET['id'];
           </form>
 
           <!-- Скрипт отображения загруженных фото -->
-          <div id="gallery" style="width:50%; margin-left: auto; margin-right: auto;">
-            <!-- тут типо эти все фотографии должны быть оформлены в рамочку ну хз оформите -->
-            <?php //Отсюда ничего не трогаем
-            $path = scandir("uploads");
-            foreach ($path as $f) {
-              if (strpos($f, $id . "_") === 0) {
-                echo "<a data-mediabox='gallery-1' href='uploads/$f'><img  src='uploads/$f' width=20% /></a>";
-              }
-            }
-            ?>
-          </div>
+
           <!-- Скрипт отображения загруженных фото -->
 
           <!-- Вкладки -->
-          <div class="tabs">
-            <input type="radio" name="inset" value="" id="tab_1" checked>
-            <label for="tab_1" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Вкладка №1</label>
+          <div class="container mx-auto my-5 p-5">
+            <div class="tabs">
+              <input type="radio" name="inset" value="" id="tab_1" checked>
+              <label for="tab_1" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">О себе</label>
 
-            <input type="radio" name="inset" value="" id="tab_2">
-            <label for="tab_2" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Вкладка №2</label>
+              <input type="radio" name="inset" value="" id="tab_2">
+              <label for="tab_2" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Мои работы</label>
 
-            <input type="radio" name="inset" value="" id="tab_3">
-            <label for="tab_3" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Вкладка №3</label>
+              <input type="radio" name="inset" value="" id="tab_3">
+              <label for="tab_3" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Грамоты</label>
 
-            <input type="radio" name="inset" value="" id="tab_4">
-            <label for="tab_4" class="items-center h-12 hover:bg-blue-200 text-white-600 hover:text-white-800">Вкладка №4</label>
             <!-- Вкладки -->
 
-            <div id="txt_1"><!-- Что будет отображаться в 1-ой вкладке -->
+            <div id="txt_1">
+              <!-- Что будет отображаться в 1-ой вкладке -->
               <!-- Скрипт отображения всех добавленных записей в 1-ой вкладке -->
               <?php
               require_once "vendor/connect.php";
@@ -241,14 +220,36 @@ $id = $_GET['id'];
 
             <div id="txt_2">
               <!-- Что будет отображаться в 2-ой вкладке -->
-              <p>Вторая вкладка</p>
-              <a href="uploads/1.pdf" data-mediabox="my-gallery-name" data-iframe="true" data-title=""> <img src="image-thumb.jpg" alt="Image" /> </a>
+              <?php //Отсюда ничего не трогаем
+                echo '<form id="delete" method="post" action="vendor/delete.php" action="" style="margin-top: 15px;">';
+                foreach (glob("uploads/{$id}_*.pdf") as $f) {
+                  $file = pathinfo($f);
+                  echo '<div style="display: inline-flex; width: 10%; flex-direction: column; margin: 20px;">';
+                  echo "<a data-mediabox='gallery-1' data-iframe='true' href='$f'><img  src='default\pdf.png' style='' /></a>";
+                  echo '<small>' . $file['basename'] . '</small>';
+                  echo '</div>';
+                }
+                echo '</form>';
+                ?>
             </div>
 
             <div id="txt_3">
               <!-- Что будет отображаться в 3-ей вкладке -->
-              <p>Размеры содержимого вкладок</p>
-              <p>могут отличаться по высоте!</p>
+              <div id="gallery">
+                  <!--style="width:50%; margin-left: auto; margin-right: auto;"-->
+                  <!-- тут типо эти все фотографии должны быть оформлены в рамочку ну хз оформите -->
+                  <?php //Отсюда ничего не трогаем
+                  foreach (glob("uploads/{$id}_*.png") as $f) {
+                    echo "<a data-mediabox='gallery-1' href='$f'><img  src='$f' width=20% /></a>";
+                  }
+                  foreach (glob("uploads/{$id}_*.jpg") as $f) {
+                    echo "<a data-mediabox='gallery-1' href='$f'><img  src='$f' width=20% /></a>";
+                  }
+                  foreach (glob("uploads/{$id}_*.jpeg") as $f) {
+                    echo "<a data-mediabox='gallery-1' href='$f'><img  src='$f' width=20% /></a>";
+                  }
+                  ?>
+                </div>
             </div>
 
             <div id="txt_4">

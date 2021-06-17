@@ -8,6 +8,10 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
     $password_confirm = $_POST['password_confirm'];
+    $pol = $_POST['pol'];
+    $birthday = $_POST['birthday'];
+    $phone = $_POST['phone'];
+    $nachobuch = $_POST['nachobuch'];
 
     if ($password === $password_confirm) {
 
@@ -23,7 +27,7 @@
 
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        mysqli_query($connect, "INSERT INTO `users` (`id`, `full_name`, `login`, `email`, `password`, `avatar`) VALUES (NULL, '$full_name', '$login', '$email', '$password', '$path')");
+        mysqli_query($connect, "INSERT INTO `users` (`id`, `full_name`, `login`, `email`, `password`, `avatar`, `pol`, `nachobuch`, `birthday`, `phone`) VALUES (NULL, '$full_name', '$login', '$email', '$password', '$path', '$pol', '$nachobuch', '$birthday', '$phone')");
 
         $_SESSION['message'] = 'Регистрация прошла успешно!';
         header('Location: ../index.php');
